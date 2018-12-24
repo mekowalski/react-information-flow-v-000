@@ -14,13 +14,30 @@ export default class Tier1 extends Component {
     }
   }
 
+  handleClick = () => {
+    let newColor = getRandomColor()
+    this.setState({
+      color: newColor,
+      childColor: getReducedColor(newColor)
+    })
+  }
+
+  handleChildClick = (e) => {
+    e.stopPropagation()
+    let newColor = getRandomColor
+    this.setState({
+      ...this.state,
+      childColor: newColor
+    })
+  }
+
   render() {
     // hard coded color values have been added below, though they won't be
     // present in our solution. What should they be replaced with?
     return (
-      <div onClick={() => {this.setState({color: "#000"})}} className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
-        <Tier2 color={"#0F0"} />
-        <Tier2 color={"#0FF"} />
+      <div onClick={this.handleClick} className='tier1' style={{backgroundColor: this.state.color, color: this.state.colo}}>
+        <Tier2 color={this.state.childColor} handleClick={this.handleClick} />
+        <Tier2 color={this.state.childColor} handleClick={this.handleClick} />
       </div>
     )
   }
